@@ -27,7 +27,8 @@ export const OpenAIStream = async (
   key: string,
   messages: Message[],
 ) => {
-  const res = await fetch(`${OPENAI_API_HOST}/v1/chat/completions`, {
+  const customApi = process.env.CUSTOM_API || OPENAI_API_HOST;
+  const res = await fetch(`${customApi}/v1/chat/completions`, {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${key ? key : process.env.OPENAI_API_KEY}`,
